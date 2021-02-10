@@ -4,34 +4,44 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from tmsr import readTMSR
 
-##The input file
-inputFile = readTMSR('hxt1.tmsr')
+coords = [[0,0],[0,1],[1,0],[1,1]]
 
 #The colors of the boxes
-colors = ['green','yellow',
-         'blue','orange','red','pink','brown']
+colors = ['green','yellow','blue','orange','red','pink','brown']
 
-tools = inputFile[0]
-coordinates = inputFile[1]
-fig = plt.figure()
-ax = fig.add_subplot(111)
+fig, axs = plt.subplots(2, 2)
 
-#Build the chart
-height = len(tools)*3
-height = height -1
-for z in range(len(coordinates)):
-    height = height - ((len(tools)-1.5)/2)
-    for i in range(len(coordinates[z])):
-        rect1 = matplotlib.patches.Rectangle((coordinates[z][i][0],height),
-                                             (coordinates[z][i][1]-coordinates[z][i][0]),
-                                             2, color =colors[z])
-        ax.add_patch(rect1)
+ax1, ax2, ax3, ax4 = axs.ravel()
 
-plt.xlim([0, 570])
-plt.ylim([0, 20])
+axes = (ax1, ax2, ax3, ax4)
 
-frame1 = plt.gca()
-frame1.axes.get_yaxis().set_ticks([])
+for r in range(len(coords)):
+
+	file = 1
+	##The input file
+	inputFile = readTMSR('../tmsrFiles/hxt' + str(file) + '.tmsr')
+
+	tools = inputFile[0]
+	coordinates = inputFile[1]
+
+	#Build the chart
+	# height = len(tools)*3
+	# height = height
+	change = (20 / len(tools))
+	height = 0
+	for z in range(len(coordinates)):
+	    for i in range(len(coordinates[z])):
+	        rect1 = matplotlib.patches.Rectangle((coordinates[z][i][0],height),
+	                                             (coordinates[z][i][1]-coordinates[z][i][0]),
+	                                             change-0.1, color =colors[z])
+	        axes[r].add_patch(rect1)
+
+	    height += change
+
+	plt.xlim([0, 570])
+	plt.ylim([0, 20])
+
+	plt.axes.get_yaxis().set_ticks([])
 
 #Make the legend
 handle = []
@@ -45,4 +55,4 @@ plt.title('Transmembrane Region Predictions: hxt1')
 
 #Output file
 plt.tight_layout()
-plt.savefig('topologyOutputs/hxt1_toplogy.pdf')
+plt.savefig('../outputFiles/hxt1_toplogy.png')

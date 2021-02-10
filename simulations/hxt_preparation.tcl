@@ -1,4 +1,4 @@
-#Preparation of PDB and PSF files for NAMD molecular
+T#Preparation of PDB and PSF files for NAMD molecular
 #dynamics simulations of yeast glucose transporters
 
 #Kobie Kirven - 2/1/2021
@@ -9,8 +9,8 @@ set outPsf hxt1.psf
 set outPdb hxt1.pdb
 
 #Indicate the anchoring residues
-set nEnd 49
-set cStart 520
+set nEnd 61
+set cStart 512
 
 #set the distance between the alpha carbons of the 
 # anchoring residues (Angstroms) 
@@ -21,7 +21,7 @@ mol new $filename
 
 #Create selections for the N and C termani
 set nTerm [atomselect top "resid 1 to $nEnd"]
-set cTerm [atomselect top "resid $cStart to 570"]
+set cTerm [atomselect top "resid $cStart to 566"]
 
 #Create a new PDB file for each terminus
 $nTerm writepdb nterm.pdb
@@ -132,7 +132,7 @@ set cZ [$cFix get {z}]
 set z_dist [expr $nZ - $cZ]
 
 #Create a selection with the C-terminus
-set c_term [atomselect top "resid $cStart to 570"]
+set c_term [atomselect top "resid $cStart to 566"]
 
 #Add each of the coordinates to the coordinates vector
 lappend vect $x_dist
