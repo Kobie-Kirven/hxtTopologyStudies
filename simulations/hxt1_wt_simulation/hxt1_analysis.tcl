@@ -52,3 +52,5 @@ close $outfile
 #hydrogen_bond analysis
 package require hbonds
 hbonds -sel1 [atomselect top "resid 1 to 60"] -sel2 [atomselect top "resid 513 to 570"] -writefile yes -plot no
+
+quit

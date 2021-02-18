@@ -18,6 +18,7 @@ set Distance 10
 # atom conversions
 package require psfgen
 topology top_all36_prot.rtf
+topology 
 pdbalias residue HIS HSE
 pdbalias atom ILE CD1 CD
 

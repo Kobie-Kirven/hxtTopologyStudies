@@ -5,19 +5,19 @@
 
 #The input pdb file name and output name
 # set filename full_model_54606_1.pdb
-set outPsf hxt1.psf
-set outPdb hxt1.pdb
+set outPsf hxt4.psf
+set outPdb hxt4.pdb
 
 #Indicate the anchoring residues
-set nEnd 61
-set cStart 513
+set nEnd 67
+set cStart 519
 
 #set the distance between the alpha carbons of the 
 # anchoring residues (Angstroms) 
 set Distance 10
 
 # Create a molecule with the input file
-mol new hxt1_N_terminus.pdb
+mol new hxt4_N_terminus.pdb
 
 # #Create selections for the N and C termani
 set nTerm [atomselect top all]
@@ -50,8 +50,8 @@ writepsf nterm.psf
 resetpsf 
 
 #Create a psf file and a pdb file with H's for the C terminus
-segment C {pdb hxt1_C_terminus.pdb}
-coordpdb hxt1_C_terminus.pdb C
+segment C {pdb hxt4_C_terminus.pdb}
+coordpdb hxt4_C_terminus.pdb C
 guesscoord
 writepdb cterm_h.pdb
 writepsf cterm.psf
@@ -152,11 +152,11 @@ $c_term moveby {0 0 10}
 $sel writepdb $outPdb
 
 #remove the intermediate files
-# rm nterm_h.pdb
-# rm nterm.psf
-# rm cterm_h.pdb
-# rm cterm.psf
-# rm nterm.pdb
-# rm cterm.pdb
+rm nterm_h.pdb
+rm nterm.psf
+rm cterm_h.pdb
+rm cterm.psf
+rm nterm.pdb
+rm cterm.pdb
 
 quit
